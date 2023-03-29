@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmailBoxService implements IEmailBoxService {
     @Autowired
-    IEmailBoxRepository iEmailBoxRepository;
+    private IEmailBoxRepository iEmailBoxRepository;
 
 
     @Override
