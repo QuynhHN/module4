@@ -7,11 +7,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class EmailBoxRepository implements IEmailBoxRepository {
     private static EmailBox emailBox;
-    private  String [] languagesList= new String[]{"English","Vietnamese"," Japanese","Chinese"};
-    private Integer [] pagesizesList= new Integer[]{5,10,15,25,50,100};
+    private String[] languagesList = new String[]{"English", "Vietnamese", " Japanese", "Chinese"};
+    private Integer[] pagesizesList = new Integer[]{5, 10, 15, 25, 50, 100};
+
     {
         emailBox = new EmailBox("English", 25, false, "Thor, King, Asgard");
-
     }
 
     public String[] getLanguagesList() {
