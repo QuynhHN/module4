@@ -12,10 +12,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/product")
 public class ProductController {
     @Autowired
-    IProductService iProductService;
+    private IProductService iProductService;
 
     @GetMapping("")
     public String showProductList(@RequestParam(required = false) String name, Model model) {
+        model.addAttribute("name", name);
         model.addAttribute("productList", iProductService.listProductByName(name));
         return "list";
     }
@@ -32,8 +33,8 @@ public class ProductController {
         return "redirect:/product";
     }
 
-    @GetMapping("/detail")
-    public String showDetail(@RequestParam int id, Model model) {
+    @GetMapping("/detail/{id}")
+    public String showDetail(@PathVariable int id, Model model) {
         model.addAttribute("product", iProductService.findById(id));
         return "detail";
     }
@@ -47,13 +48,14 @@ public class ProductController {
     @PostMapping("/update")
     public String performUpdate(@ModelAttribute Product product, RedirectAttributes redirect, Model model) {
         iProductService.updateProduct(product.getId(), product);
-        redirect.addFlashAttribute("msg","Chỉnh sửa thành công");
+        redirect.addFlashAttribute("msg", "Chỉnh sửa thành công");
         model.addAttribute("product", product);
         return "redirect:/product";
     }
+
     @GetMapping("/delete")
-    public String performDelete(@RequestParam int idDelete){
-        iProductService.deleteProduct(idDelete);
+    public String performDelete(@RequestParam int deleteId) {
+        iProductService.deleteProduct(deleteId);
         return "redirect:/product";
     }
 }

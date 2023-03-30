@@ -13,7 +13,7 @@ public class ProductRepository implements IProductRepository {
 
     static {
         productList.add(new Product(1, "Laptop", 25000, "Gaming", "Dell"));
-        productList.add(new Product(2, "Laptop", 20000, "Window 11", "Acer"));
+        productList.add(new Product(2, "PC", 20000, "Window 11", "Acer"));
         productList.add(new Product(3, "Laptop", 15000, "Window 10", "Lenovo"));
     }
 
@@ -47,12 +47,7 @@ public class ProductRepository implements IProductRepository {
     }
 
     @Override
-    public void updateProduct(int id,Product product) {
-//        for (int i = 0; i < productList.size(); i++) {
-//            if (productList.get(i).getId().equals(id)) {
-//                productList.set(i, product);
-//            }
-//        }
+    public void updateProduct(int id, Product product) {
         for (Product value : productList) {
             if (product.getId() == value.getId()) {
                 value.setName(product.getName());
