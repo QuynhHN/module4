@@ -48,7 +48,6 @@ public class ProductController {
     @PostMapping("/update")
     public String performUpdate(@ModelAttribute Product product, RedirectAttributes redirect, Model model) {
         iProductService.updateProduct(product.getId(), product);
-        redirect.addFlashAttribute("msg", "Chỉnh sửa thành công");
         model.addAttribute("product", product);
         return "redirect:/product";
     }
