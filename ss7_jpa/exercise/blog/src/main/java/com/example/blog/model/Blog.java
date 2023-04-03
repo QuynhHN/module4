@@ -16,14 +16,14 @@ public class Blog {
     @Column(name = "author", columnDefinition = "VARCHAR(100)")
     private String author;
     @Column(name = "date_submitted", columnDefinition = "DATE")
-    private Date dateSubmitted;
+    private String dateSubmitted;
     @Column(name = "content", columnDefinition = "TEXT")
     private String content;
 
     public Blog() {
     }
 
-    public Blog(Integer id, String title, String author, Date dateSubmitted, String content) {
+    public Blog(Integer id, String title, String author, String dateSubmitted, String content) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -55,11 +55,11 @@ public class Blog {
         this.author = author;
     }
 
-    public Date getDateSubmitted() {
+    public String getDateSubmitted() {
         return dateSubmitted;
     }
 
-    public void setDateSubmitted(Date dateSubmitted) {
+    public void setDateSubmitted(String dateSubmitted) {
         this.dateSubmitted = dateSubmitted;
     }
 
