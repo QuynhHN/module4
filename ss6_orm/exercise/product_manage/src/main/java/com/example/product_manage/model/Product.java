@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "products")
 @NamedQuery(
-        name = "findAllCustomersWithName",
+        name = "findAllProductWithName",
         query = "select p from Product p where name like concat('%', :name, '%')"
 )
 public class Product {

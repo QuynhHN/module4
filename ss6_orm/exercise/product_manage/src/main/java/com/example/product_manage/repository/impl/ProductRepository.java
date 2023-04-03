@@ -16,7 +16,7 @@ public class ProductRepository implements IProductRepository {
 
     @Override
     public List<Product> listProductByName(String name) {
-        List<Product> products = BaseRepository.entityManager.createNamedQuery("findAllCustomersWithName", Product.class).setParameter("name", name).getResultList();
+        List<Product> products = BaseRepository.entityManager.createNamedQuery("findAllProductWithName", Product.class).setParameter("name", name).getResultList();
         return products;
     }
 
@@ -35,7 +35,7 @@ public class ProductRepository implements IProductRepository {
     }
 
     @Override
-    public void updateProduct(int id, Product product) {
+    public void updateProduct(Product product) {
         EntityTransaction entityTransaction = BaseRepository.entityManager.getTransaction();
         entityTransaction.begin();
         BaseRepository.entityManager.merge(product);
