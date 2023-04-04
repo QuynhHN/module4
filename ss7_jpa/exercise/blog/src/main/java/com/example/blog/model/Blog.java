@@ -1,6 +1,9 @@
 package com.example.blog.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -16,14 +19,15 @@ public class Blog {
     @Column(name = "author", columnDefinition = "VARCHAR(100)")
     private String author;
     @Column(name = "date_submitted", columnDefinition = "DATE")
-    private String dateSubmitted;
+    @DateTimeFormat(fallbackPatterns = "yyyy-MM-dd")
+    private LocalDate dateSubmitted;
     @Column(name = "content", columnDefinition = "TEXT")
     private String content;
 
     public Blog() {
     }
 
-    public Blog(Integer id, String title, String author, String dateSubmitted, String content) {
+    public Blog(Integer id, String title, String author, LocalDate dateSubmitted, String content) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -55,11 +59,11 @@ public class Blog {
         this.author = author;
     }
 
-    public String getDateSubmitted() {
+    public LocalDate getDateSubmitted() {
         return dateSubmitted;
     }
 
-    public void setDateSubmitted(String dateSubmitted) {
+    public void setDateSubmitted(LocalDate dateSubmitted) {
         this.dateSubmitted = dateSubmitted;
     }
 
