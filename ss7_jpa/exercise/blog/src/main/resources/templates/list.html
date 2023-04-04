@@ -42,6 +42,7 @@
         <th scope="col">Tên tác giả </th>
         <th scope="col">Ngày viết</th>
         <th scope="col">Mô tả</th>
+        <th scope="col">Danh mục</th>
         <th scope="col">Chức năng</th>
     </tr>
     </thead>
@@ -52,6 +53,7 @@
         <td th:text="${blog.author}"></td>
         <td th:text="${blog.dateSubmitted}"></td>
         <td th:text="${blog.content}"></td>
+        <td th:text="${blog.category.getNameCategory()}"></td>
         <td>
             <a th:href="@{/blog/update/{id}(id=${blog.id})}" class="btn btn-primary"><i
                     class="fas fa-edit"></i></a>

@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="container" style="margin-top: 5%;width: 60%">
-    <a href="/product" style="margin-left: 30em">
+    <a href="/blog" style="margin-left: 30em">
         <button type="button" class="btn btn-secondary">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-fill"
                  viewBox="0 0 16 16">
@@ -18,7 +18,7 @@
         </button>
     </a>
     <h2>Chi tiết bài viết</h2>
-    <form action="/blog/detail" th:object="${blog}">
+    <form th:object="${blog}">
         <table border="1px" class="table table-striped w-50">
             <tr>
                 <th>Tên bài viết</th>
@@ -35,6 +35,10 @@
             <tr>
                 <th>Mô tả</th>
                 <td th:text="${blog.content}"></td>
+            </tr>
+            <tr>
+                <th>Danh mục </th>
+                <td th:text="${blog.category.getNameCategory()}"></td>
             </tr>
         </table>
     </form>

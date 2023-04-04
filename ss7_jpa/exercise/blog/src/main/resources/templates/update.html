@@ -39,6 +39,13 @@
             <input type="text" class="form-control" th:field="*{content}" name="content">
         </div>
         <div class="mb-3">
+            <label class="form-label">Danh mục</label>
+            <select th:field="*{category}">
+                <option th:each="category:${categoryList}" th:text="${category.nameCategory}"
+                        th:value="${category.idCategory}"></option>
+            </select>
+        </div>
+        <div class="mb-3">
             <button type="submit" class="btn btn-primary">Cập nhật</button>
             <input type="reset" class="btn btn-secondary" value="Hủy bỏ"/>
         </div>

@@ -4,6 +4,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 @Entity
@@ -20,19 +21,23 @@ public class Blog {
     private String author;
     @Column(name = "date_submitted", columnDefinition = "DATE")
     @DateTimeFormat(fallbackPatterns = "yyyy-MM-dd")
-    private LocalDate dateSubmitted;
+    private String dateSubmitted;
     @Column(name = "content", columnDefinition = "TEXT")
     private String content;
+    @ManyToOne
+    @JoinColumn(name = "id_category")
+    private Category category;
 
     public Blog() {
     }
 
-    public Blog(Integer id, String title, String author, LocalDate dateSubmitted, String content) {
+    public Blog(Integer id, String title, String author, String dateSubmitted, String content, Category category) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.dateSubmitted = dateSubmitted;
         this.content = content;
+        this.category = category;
     }
 
     public Integer getId() {
@@ -59,13 +64,31 @@ public class Blog {
         this.author = author;
     }
 
-    public LocalDate getDateSubmitted() {
+    public String getDateSubmitted() {
         return dateSubmitted;
     }
 
-    public void setDateSubmitted(LocalDate dateSubmitted) {
+    public void setDateSubmitted(String dateSubmitted) {
         this.dateSubmitted = dateSubmitted;
     }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    //    public String getDateSubmitted() {
+//        DateTimeFormatter dtFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+//        return dtFormatter.format(dateSubmitted);
+//    }
+
+//    public void setDateSubmitted(LocalDate dateSubmitted) {
+//        this.dateSubmitted = dateSubmitted;
+//    }
 
     public String getContent() {
         return content;
