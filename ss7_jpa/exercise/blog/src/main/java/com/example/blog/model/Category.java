@@ -2,13 +2,13 @@ package com.example.blog.model;
 
 import javax.persistence.*;
 
-@Entity (name = "category")
+@Entity(name = "category")
 public class Category {
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_category")
     private Integer idCategory;
-    @Column (name="name_category", columnDefinition = "VARCHAR(50)")
+    @Column(name = "name_category", columnDefinition = "VARCHAR(50)")
     private String nameCategory;
 
     public Category() {

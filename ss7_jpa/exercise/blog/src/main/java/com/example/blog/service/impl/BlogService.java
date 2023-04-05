@@ -10,14 +10,14 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service ("blogService")
+@Service("blogService")
 public class BlogService implements IBlogService {
     @Autowired
     private IBlogRepository iBlogRepository;
 
     @Override
     public Page<Blog> findAll(String title, Pageable pageable) {
-        return iBlogRepository.findByTitleContaining(title,pageable);
+        return iBlogRepository.findByTitleContaining(title, pageable);
     }
 
     @Override

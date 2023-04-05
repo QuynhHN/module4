@@ -12,22 +12,26 @@ import org.springframework.web.bind.annotation.*;
 public class CategoryController {
     @Autowired
     private ICategoryService iCategoryService;
+
     @GetMapping("")
     public String showListCategory(@RequestParam(required = false, defaultValue = "") String nameCategory, Model model) {
         model.addAttribute("nameCategory", nameCategory);
         model.addAttribute("categoryList", iCategoryService.findAll());
         return "/category";
     }
+
     @GetMapping("/create-category")
-    public String showCreateCategory (Model model){
-        model.addAttribute("category",new Category());
+    public String showCreateCategory(Model model) {
+        model.addAttribute("category", new Category());
         return "create-category";
     }
+
     @PostMapping("/create-category")
-    public String performCreateCategory(@ModelAttribute Category category){
+    public String performCreateCategory(@ModelAttribute Category category) {
         iCategoryService.save(category);
         return "redirect:/category";
     }
+
     @GetMapping("/update-category/{idCategory}")
     public String showUpdateCategory(@PathVariable int idCategory, Model model) {
         model.addAttribute("category", iCategoryService.findById(idCategory));
@@ -39,6 +43,7 @@ public class CategoryController {
         iCategoryService.save(category);
         return "redirect:/category";
     }
+
     @GetMapping("/delete-category")
     public String performDeleteCategory(@RequestParam(required = false) Integer idCategoryDelete) {
         iCategoryService.delete(idCategoryDelete);
