@@ -5,15 +5,14 @@ import com.example.song.model.Song;
 import com.example.song.server.ISongService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/song")
@@ -22,21 +21,43 @@ public class SongController {
     private ISongService iSongService;
     @GetMapping("")
     public String showList(Model model){
-        model.addAttribute("songList", iSongService.listAll());
-        return "/list";
+        model.addAttribute("songList", iSongService.findAll());
+        return "list";
     }
-    @GetMapping("/create-form")
+    @GetMapping("/create")
     public String createForm(Model model){
         model.addAttribute("songDTO", new SongDTO());
-        return "/create";
+        return "create";
     }
     @PostMapping("/create")
-    public String create(@Validated @ModelAttribute SongDTO songDTO, BindingResult bindingResult){
+    public String create(@Valid @ModelAttribute SongDTO songDTO,
+                         BindingResult bindingResult,RedirectAttributes redirectAttributes,Model model){
         if (bindingResult.hasErrors()){
+            model.addAttribute("songDTO",songDTO);
             return "/create";
         }
-        Song song = new Song();
-        BeanUtils.copyProperties(songDTO, song);
-        return "redirect:/song";
+        else {
+            iSongService.create(songDTO);
+            redirectAttributes.addAttribute("msg","thêm mới thành công");
+            return "redirect:/song";
+        }
+    }
+    @GetMapping("/update/{id}")
+    public String updateForm(@PathVariable int id, Model model){
+        model.addAttribute("songDTO",iSongService.findById(id));
+        return "update";
+    }
+    @PostMapping("/update")
+    public String update(@Validated @ModelAttribute SongDTO songDTO,
+                         BindingResult bindingResult, RedirectAttributes redirectAttributes,Model model){
+        if (bindingResult.hasErrors()){
+            model.addAttribute("songDTO",songDTO);
+            return "update";
+        }else {
+            iSongService.update(songDTO);
+            redirectAttributes.addFlashAttribute("msg","update thành công");
+            return "redirect:/song";
+        }
+
     }
 }

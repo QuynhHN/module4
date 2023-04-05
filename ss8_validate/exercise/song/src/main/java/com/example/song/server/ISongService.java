@@ -1,13 +1,12 @@
 package com.example.song.server;
 
+import com.example.song.dto.SongDTO;
 import com.example.song.model.Song;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
-@Service
 public interface ISongService{
-    List<Song> listAll();
-    void create(Song song);
-    Song findById(Integer id);
-    void update(Song song);
+    List<Song> findAll();
+    void create(SongDTO song);
+    Song findById(int id);
+    void update(SongDTO song);
 }

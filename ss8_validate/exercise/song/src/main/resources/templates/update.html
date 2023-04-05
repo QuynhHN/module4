@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
-    <title>Create</title>
+    <title>Update</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -21,12 +21,15 @@
             </svg>
         </button>
     </a>
-    <h2 style="text-align: center">Create song</h2>
-    <form action="/song/create" class="form-group" method="post" th:object="${songDTO}" novalidate="novalidate">
+    <h2 style="text-align: center">Update song</h2>
+    <form action="/song/update" class="form-group" method="post" th:object="${songDTO}">
         <div class="mb-3">
-            <label for="name">Name Song</label>
+            <input type="hidden" class="form-control" th:field="*{id}" id="id">
+        </div>
+        <div class="mb-3">
+            <label>Name Song</label>
             <input type="text" class="form-control" th:field="*{name}" id="name">
-            <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</p>
+            <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</p>
         </div>
         <div class="mb-3">
             <label for="singer">Singer</label>
@@ -39,7 +42,7 @@
             <p th:if="${#fields.hasErrors('type')}" th:errors="*{type}">Type Error</p>
         </div>
         <div class="mb-3">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Update</button>
             <input type="reset" class="btn btn-secondary" value="Cancel"/>
         </div>
     </form>

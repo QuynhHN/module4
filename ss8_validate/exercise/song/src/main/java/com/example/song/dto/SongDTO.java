@@ -1,34 +1,64 @@
 package com.example.song.dto;
 
-import org.springframework.validation.Errors;
-import org.springframework.validation.Validator;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
-public class SongDTO implements Validator {
+import javax.validation.constraints.*;
+
+public class SongDTO {
     private Integer id;
-    @NotBlank(message = "can not be blank or space")
-    @Size(max = 800, message = "Do not enter more than 800 characters")
-    @Pattern(regexp = "[a-zA-Z0-9]*",  message = "Do not enter more than 800 characters")
+    @NotEmpty(message = "can not be blank or space")
+    @Size(max = 800, min = 1, message = "Do not enter more than 800 characters")
+    @Pattern(regexp = "^((?=[A-Za-z0-9,])(?![_\\\\\\\\-]).)*$",  message = "Do not enter more than 800 characters")
     private String name;
-    @NotBlank(message = "can not be blank or space")
-    @Size(max = 300, message = "Do not enter more than 300 characters")
-    @Pattern(regexp = "[a-zA-Z0-9]*",  message = "Do not enter more than 800 characters")
+    @NotNull(message = "can not be blank or space")
+    @Size(max = 300,min = 1, message = "Do not enter more than 300 characters")
+    @Pattern(regexp = "^((?=[A-Za-z0-9,])(?![_\\\\\\\\-]).)*$",  message = "Do not enter more than 800 characters")
     private String singer;
-    @NotBlank(message = "can not be blank or space")
-    @Size(max = 1000, message = "Do not enter more than 1000 characters")
-    @Pattern(regexp = "[a-zA-Z0-9]*",  message = "Do not enter more than 800 characters")
+    @NotNull(message = "can not be blank or space")
+    @Size(max = 1000,min = 1, message = "Do not enter more than 1000 characters")
+    @Pattern(regexp = "^((?=[A-Za-z0-9,])(?![_\\\\\\\\-]).)*$",  message = "Do not enter more than 800 characters")
     private String type;
 
-    @Override
-    public boolean supports(Class<?> clazz) {
-        return false;
+    public SongDTO() {
     }
 
-    @Override
-    public void validate(Object target, Errors errors) {
-
+    public SongDTO(Integer id, String name, String singer, String type) {
+        this.id = id;
+        this.name = name;
+        this.singer = singer;
+        this.type = type;
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSinger() {
+        return singer;
+    }
+
+    public void setSinger(String singer) {
+        this.singer = singer;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
 }
