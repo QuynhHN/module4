@@ -25,7 +25,7 @@ public class BlogController {
     public String showList(@RequestParam(required = false, defaultValue = "") String title, @RequestParam(defaultValue = "0") int page, Model model) {
         Sort sort = Sort.by("dateSubmitted").descending();
         model.addAttribute("title", title);
-        model.addAttribute("blogList", iBlogService.findAll(title, PageRequest.of(page, 5, sort)));
+        model.addAttribute("blogList", iBlogService.findAll(title, PageRequest.of(page, 1, sort)));
         return "/list";
     }
 
