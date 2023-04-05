@@ -16,7 +16,7 @@ public class CategoryController {
     @GetMapping("")
     public String showListCategory(@RequestParam(required = false, defaultValue = "") String nameCategory, Model model) {
         model.addAttribute("nameCategory", nameCategory);
-        model.addAttribute("categoryList", iCategoryService.findAll());
+        model.addAttribute("categoryList", iCategoryService.findByNameCategoryContaining(nameCategory));
         return "/category";
     }
 
