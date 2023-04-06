@@ -5,17 +5,20 @@ import javax.validation.constraints.*;
 
 public class SongDTO {
     private Integer id;
+
     @NotEmpty(message = "can not be blank or space")
     @Size(max = 800, min = 1, message = "Do not enter more than 800 characters")
-    @Pattern(regexp = "^((?=[A-Za-z0-9,])(?![_\\\\\\\\-]).)*$", message = "Do not enter more than 800 characters")
+    @Pattern(regexp = "^((?=[A-Za-z0-9,])(?![_\\\\\\\\-]).)*$", message = "No special characters")
     private String name;
+
     @NotNull(message = "Can not be blank or space")
     @Size(max = 300, min = 1, message = "Do not enter more than 300 characters")
-    @Pattern(regexp = "^((?=[A-Za-z0-9,])(?![_\\\\\\\\-]).)*$", message = "Do not enter more than 800 characters")
+    @Pattern(regexp = "^((?=[A-Za-z0-9,])(?![_\\\\\\\\-]).)*$", message = "No special characters")
     private String singer;
+
     @NotNull(message = "can not be blank or space")
     @Size(max = 1000, min = 1, message = "Do not enter more than 1000 characters")
-    @Pattern(regexp = "^((?=[A-Za-z0-9,])(?![_\\\\\\\\-]).)*$", message = "Do not enter more than 800 characters")
+    @Pattern(regexp = "^((?=[A-Za-z0-9,])(?![_\\\\\\\\-]).)*$", message = "No special characters")
     private String category;
 
     public SongDTO() {
