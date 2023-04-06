@@ -19,45 +19,52 @@ import javax.validation.Valid;
 public class SongController {
     @Autowired
     private ISongService iSongService;
+
     @GetMapping("")
-    public String showList(Model model){
+    public String showList(Model model) {
         model.addAttribute("songList", iSongService.findAll());
         return "list";
     }
+
     @GetMapping("/create")
-    public String createForm(Model model){
+    public String createForm(Model model) {
         model.addAttribute("songDTO", new SongDTO());
         return "create";
     }
+
     @PostMapping("/create")
     public String create(@Valid @ModelAttribute SongDTO songDTO,
-                         BindingResult bindingResult,RedirectAttributes redirectAttributes,Model model){
-        if (bindingResult.hasErrors()){
-            model.addAttribute("songDTO",songDTO);
+                         BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("songDTO", songDTO);
             return "/create";
-        }
-        else {
-            iSongService.create(songDTO);
-            redirectAttributes.addAttribute("msg","thêm mới thành công");
+        } else {
+            Song song = new Song();
+            BeanUtils.copyProperties(songDTO, song);
+            iSongService.create(song);
+            redirectAttributes.addAttribute("msg", "Create successful");
             return "redirect:/song";
         }
     }
+
     @GetMapping("/update/{id}")
-    public String updateForm(@PathVariable int id, Model model){
-        model.addAttribute("songDTO",iSongService.findById(id));
+    public String updateForm(@PathVariable int id, Model model) {
+        model.addAttribute("songDTO", iSongService.findById(id));
         return "update";
     }
+
     @PostMapping("/update")
     public String update(@Validated @ModelAttribute SongDTO songDTO,
-                         BindingResult bindingResult, RedirectAttributes redirectAttributes,Model model){
-        if (bindingResult.hasErrors()){
-            model.addAttribute("songDTO",songDTO);
+                         BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("songDTO", songDTO);
             return "update";
-        }else {
-            iSongService.update(songDTO);
-            redirectAttributes.addFlashAttribute("msg","update thành công");
+        } else {
+            Song song = new Song();
+            BeanUtils.copyProperties(songDTO, song);
+            iSongService.update(song);
+            redirectAttributes.addFlashAttribute("msg", "Update successful");
             return "redirect:/song";
         }
-
     }
 }

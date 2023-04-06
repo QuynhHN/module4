@@ -21,9 +21,7 @@ public class SongService implements ISongService {
     }
 
     @Override
-    public void create(SongDTO songDTO) {
-        Song song = new Song();
-        BeanUtils.copyProperties(songDTO, song);
+    public void create(Song song) {
         iSongRepository.save(song);
     }
 
@@ -33,9 +31,7 @@ public class SongService implements ISongService {
     }
 
     @Override
-    public void update(SongDTO songDTO) {
-        Song song =new Song();
-        BeanUtils.copyProperties(songDTO,song);
+    public void update(Song song) {
         iSongRepository.save(song);
     }
 }

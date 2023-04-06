@@ -15,13 +15,13 @@ public class UserCreateDTO implements Validator {
     @Size(min = 5, max = 45, message = "Input more than 5 character and less than 45 character")
     private String lastName;
     @NotBlank(message = "Phone number cannot be empty")
-    @Pattern(regexp = "^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$", message = "Incorrect phone number syntax")
+    @Pattern(regexp = "^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$", message = "Incorrect phone number syntax. Example: 0xxxxxxxxx")
     private String phoneNumber;
     @NotNull(message = "Age cannot be empty")
     @Min(18)
     private Integer age;
     @NotBlank(message = "Email cannot be empty")
-    @Pattern(regexp = "^[a-z][a-z0-9_\\.]{5,32}@[a-z0-9]{2,}(\\.[a-z0-9]{2,4}){1,2}$", message = "Incorrect email syntax")
+    @Pattern(regexp = "^[a-z][a-z0-9_\\.]{5,32}@[a-z0-9]{2,}(\\.[a-z0-9]{2,4}){1,2}$", message = "Incorrect email syntax example xxx@xxx.xxx (xxx: (A-Z)or (a-z) or number or character special) ")
     private String email;
 
     public UserCreateDTO() {

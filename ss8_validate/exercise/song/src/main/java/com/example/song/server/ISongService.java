@@ -6,7 +6,7 @@ import com.example.song.model.Song;
 import java.util.List;
 public interface ISongService{
     List<Song> findAll();
-    void create(SongDTO song);
+    void create(Song song);
     Song findById(int id);
-    void update(SongDTO song);
+    void update(Song song);
 }

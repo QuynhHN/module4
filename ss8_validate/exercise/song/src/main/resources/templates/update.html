@@ -29,17 +29,17 @@
         <div class="mb-3">
             <label>Name Song</label>
             <input type="text" class="form-control" th:field="*{name}" id="name">
-            <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</p>
+            <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</p>
         </div>
         <div class="mb-3">
             <label for="singer">Singer</label>
             <input type="text" class="form-control" th:field="*{singer}" id="singer">
-            <p th:if="${#fields.hasErrors('singer')}" th:errors="*{singer}">Singer Error</p>
+            <p style="color: red" th:if="${#fields.hasErrors('singer')}" th:errors="*{singer}">Singer Error</p>
         </div>
         <div class="mb-3">
-            <label for="type">Type</label>
-            <input type="text" class="form-control" th:field="*{type}" id="type">
-            <p th:if="${#fields.hasErrors('type')}" th:errors="*{type}">Type Error</p>
+            <label for="category">Category song</label>
+            <input type="text" class="form-control" th:field="*{category}" id="category">
+            <p style="color: red" th:if="${#fields.hasErrors('category')}" th:errors="*{category}">Category Error</p>
         </div>
         <div class="mb-3">
             <button type="submit" class="btn btn-primary">Update</button>

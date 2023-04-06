@@ -35,7 +35,7 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public String creationForm(@Valid @ModelAttribute ("userDTO")UserCreateDTO userCreateDTO,
+    public String creationForm(@Valid @ModelAttribute("userDTO") UserCreateDTO userCreateDTO,
                                BindingResult bindingResult,
                                RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {

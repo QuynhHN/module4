@@ -7,22 +7,23 @@ import javax.persistence.*;
 public class Song {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Integer id;
-
+    @Column(name = "name")
     private String name;
-
+    @Column(name = "singer")
     private String singer;
-
-    private String type;
+    @Column(name = "category")
+    private String category;
 
     public Song() {
     }
 
-    public Song(Integer id, String name, String singer, String type) {
+    public Song(Integer id, String name, String singer, String category) {
         this.id = id;
         this.name = name;
         this.singer = singer;
-        this.type = type;
+        this.category = category;
     }
 
     public Integer getId() {
@@ -49,11 +50,11 @@ public class Song {
         this.singer = singer;
     }
 
-    public String getType() {
-        return type;
+    public String getCategory() {
+        return category;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setCategory(String category) {
+        this.category = category;
     }
 }
