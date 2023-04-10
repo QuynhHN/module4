@@ -35,17 +35,19 @@
             <th scope="col">Content</th>
             <th scope="col">Quantity</th>
             <th scope="col">Name borrow</th>
+            <th scope="col">Day borrow</th>
+            <th scope="col">Fuction</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="code:${bookCodeList}">
             <td th:text="${code.idBookCode}"></td>
             <td th:text="${code.bookCode}"></td>
-            <td th:text="${code.book.getName()}"></td>
-            <td th:text="${code.book.getContent()}"></td>
-            <td th:text="${code.book.getQuantity()}"></td>
-            <td th:text="${code.borrower.getNameBorrower()}"></td>
-
+            <td th:text="${code.book?.getName()}"></td>
+            <td th:text="${code.book?.getContent()}"></td>
+            <td th:text="${code.book?.getQuantity()}"></td>
+            <td th:text="${code.borrower?.getNameBorrower()}"></td>
+            <td th:text="${code.dayBorrow}"></td>
             <td>
                 <a th:href="@{/code/update/{id}(id=${code.idBookCode})}" class="btn btn-primary"><i
                         class="fas fa-edit"></i></a>

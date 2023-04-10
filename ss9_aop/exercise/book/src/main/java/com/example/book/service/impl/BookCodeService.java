@@ -32,4 +32,10 @@ public class BookCodeService implements IBookCodeService {
     public void delete(int idBookCode) {
         iBookCodeRepository.delete(findById(idBookCode));
     }
+
+    @Override
+    public void remove(int bookcode) {
+
+    }
+
 }

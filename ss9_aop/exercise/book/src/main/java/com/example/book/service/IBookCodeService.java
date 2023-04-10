@@ -12,4 +12,5 @@ public interface IBookCodeService {
     void save(BookCode bookCode);
 
     void delete(int idBookCode);
+    void remove(int bookcode);
 }

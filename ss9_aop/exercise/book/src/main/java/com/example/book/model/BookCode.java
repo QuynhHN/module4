@@ -5,13 +5,17 @@ import javax.persistence.*;
 @Entity(name = "bookCode")
 @Table(name = "bookCode")
 public class BookCode {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_code")
     private Integer idBookCode;
 
-    @Column(unique = true)
+    @Column(name = "book_code",unique = true)
     private Integer bookCode;
+
+    @Column(name = "day_borrow")
+    private String dayBorrow;
 
     @ManyToOne
     @JoinColumn(name = "id", nullable = false)
@@ -24,12 +28,14 @@ public class BookCode {
     public BookCode() {
     }
 
-    public BookCode(Integer idBookCode, Integer bookCode, Book book, Borrower borrower) {
+    public BookCode(Integer idBookCode, Integer bookCode, String dayBorrow, Book book, Borrower borrower) {
         this.idBookCode = idBookCode;
         this.bookCode = bookCode;
+        this.dayBorrow = dayBorrow;
         this.book = book;
         this.borrower = borrower;
     }
+
 
     public Integer getIdBookCode() {
         return idBookCode;
@@ -45,6 +51,14 @@ public class BookCode {
 
     public void setBookCode(Integer bookCode) {
         this.bookCode = bookCode;
+    }
+
+    public String getDayBorrow() {
+        return dayBorrow;
+    }
+
+    public void setDayBorrow(String dayBorrow) {
+        this.dayBorrow = dayBorrow;
     }
 
     public Book getBook() {

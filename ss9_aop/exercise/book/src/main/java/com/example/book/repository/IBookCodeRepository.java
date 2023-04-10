@@ -9,4 +9,5 @@ public interface IBookCodeRepository extends JpaRepository<BookCode,Integer> {
     List<BookCode> findAll();
     BookCode findById(int idBookCode);
 
+
 }
