@@ -76,13 +76,13 @@ public class BookCodeController {
         }else {
             iBookService.borrow(id,idBorrower);
         }
-        return "redirect:/book";
+        return "redirect:/code";
     }
 
     @GetMapping("/return")
     public String returnBook(@RequestParam(required = false) Integer codeBook) {
 //        iBookService.returnBook(codeBook);
 //        iBookCodeService.remove(codeBook);
-        return "redirect:/book";
+        return "redirect:/code";
     }
 }
