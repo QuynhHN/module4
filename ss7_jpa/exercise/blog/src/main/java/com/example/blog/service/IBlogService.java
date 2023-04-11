@@ -11,7 +11,7 @@ public interface IBlogService {
 
     void save(Blog blog);
 
-
+    List<Blog> findAll();
     void delete(int id);
 
     Blog findById(int id);
