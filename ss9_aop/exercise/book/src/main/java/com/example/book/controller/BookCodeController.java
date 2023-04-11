@@ -85,4 +85,8 @@ public class BookCodeController {
 //        iBookCodeService.remove(codeBook);
         return "redirect:/code";
     }
+    @ExceptionHandler(Exception.class)
+    public String handel(){
+        return "/error";
+    }
 }
