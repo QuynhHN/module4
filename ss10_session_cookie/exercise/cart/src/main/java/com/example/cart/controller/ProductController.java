@@ -15,16 +15,19 @@ import java.util.Optional;
 public class ProductController {
     @Autowired
     private IProductService iProductService;
+    
     @ModelAttribute("cart")
     public Cart setupCard(){
         return new Cart();
     }
+
     @GetMapping("/shop")
     public ModelAndView showShop(){
         ModelAndView modelAndView = new ModelAndView("shop");
         modelAndView.addObject("products",iProductService.findAll());
         return modelAndView;
     }
+
     @GetMapping("/add/{id}")
     public String addToCart(@PathVariable int id, @RequestParam("action") String action,
                             @ModelAttribute Cart cart){
@@ -39,6 +42,7 @@ public class ProductController {
         cart.addProduct(productOptional.get());
         return "redirect:/shop";
     }
+
     @GetMapping("/decrease/{id}")
     public String decreaseToCart(@PathVariable int id,@ModelAttribute Cart cart){
         Optional<Product> productOptional = iProductService.findById(id);
@@ -49,6 +53,7 @@ public class ProductController {
             return "redirect:/shopping-cart";
         }
     }
+
     @GetMapping("/detail")
     public ModelAndView detail(@RequestParam(required = false) Integer id){
         ModelAndView modelAndView = new ModelAndView("/detail");

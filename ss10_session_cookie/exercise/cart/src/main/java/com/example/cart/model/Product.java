@@ -9,11 +9,15 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     @Column(name = "name_product")
     private String name;
+
     private double price;
+
     @Column(name = "img",columnDefinition = "TEXT")
     private String img;
+
     @Column(name = "description_product")
     private String description;
 

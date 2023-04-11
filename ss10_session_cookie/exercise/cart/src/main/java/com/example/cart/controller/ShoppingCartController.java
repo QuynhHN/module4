@@ -13,6 +13,7 @@ public class ShoppingCartController {
     public Cart setupCart(){
         return new Cart();
     }
+
     @GetMapping("/shopping-cart")
     public ModelAndView showCart(@SessionAttribute("cart") Cart cart){
         ModelAndView modelAndView = new ModelAndView("/cart");
