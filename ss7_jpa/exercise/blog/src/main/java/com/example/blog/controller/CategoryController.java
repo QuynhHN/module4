@@ -32,7 +32,7 @@ public class CategoryController {
         }
         return new ResponseEntity<>(categoryList, HttpStatus.OK);
     }
-    
+
     @GetMapping("/{id}")
     public ResponseEntity<Blog> showDetail(@PathVariable int id) {
         iCategoryService.findAll();
