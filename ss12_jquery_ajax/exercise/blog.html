@@ -26,17 +26,18 @@
         </svg>
         <a href="category.html" style="text-decoration: none;color: white;"><i class="bi bi-cart4"> Danh mục </i></a>
     </button>
-    <form>
+    <div>
         <div class="form-group float-start w-30" style="margin-right: 1em">
             <input type="text"
-                   class="form-control" name="name" aria-describedby="helpId"
+                   class="form-control" name="title" aria-describedby="helpId"
+                   id="title"
                    placeholder="Nhập bài viết cần tìm...">
         </div>
         <div class="float-start w-80">
-            <button type="submit" class="btn btn-primary" onclick="loadBlog()">Tìm kiếm</button>
+            <button type="button" class="btn btn-primary" onclick="loadBlog()">Tìm kiếm</button>
         </div>
-    </form>
-    <table class="table">
+    </div>
+    <table class="table" id="table-blog">
         <thead>
         <tr>
             <th scope="col">Mã bài viết</th>
@@ -51,7 +52,7 @@
         <tbody id="listBlogs"></tbody>
     </table>
     <!--Tải thêm-->
-    <div class="d-flex justify-content-center" id="loadMoreContainer"></div>
+    <button id="loadMore">Tải thêm</button>
     <!--  Modal xóa  <%-->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -84,35 +85,21 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
 <script>
-    // load Blog
-    function loadMore(nextPage) {
-        loadBlogs(nextPage, true);
-    }
+    let page = 0;
 
-    function renderLoadMoreBtn(blogPageData) {
-        if (blogPageData.number < blogPageData.totalPages - 1) {
-            $("#loadMoreContainer").html(
-                `
-                <button id="loadMoreId" type="button" class="btn btn-primary"
-                onclick="loadMore(${blogPageData.number + 1})">
-                Load More
-                </button>
-            `
-            );
-        } else {
-            $("#loadMoreId").remove();
-        }
-    }
-    function loadBlog(page, append) {
-        let title = $("#title").val();
+    function loadBlog() {
+        let title = document.getElementById("title").value
+        console.log(title)
         $.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
             type: "GET",
             //tên API
-            url: `http://localhost:8080/api/blog?page =${page ? page : "0"}&title=${title}`,
+            url: `http://localhost:8080/api/blog?title=${title}`,
             //xử lý khi thành công
             success: function (data) {
-                // renderBlogs(data.content, append);
-                // renderLoadMoreBtn(data);
                 debugger
                 // hien thi danh sach o day
                 let content = '';
@@ -142,10 +129,40 @@
 
     loadBlog();
 
-    function deleteId(id, title) {
-    document.getElementById("deleteId").value = id;
-    document.getElementById("deleteTitle").innerText = title;
-    }
+    $(`#loadMore`).click(function (data) {
+        page = page + 1;
+        $.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            type: "GET",
+            //tên API
+            url: `http://localhost:8080/api/blog?page=` + page,
+            success: function (data) {
+                let table = document.getElementById("table-blog");
+                let content = '';
+                let tempRow = 2 * page;
+                debugger
+                for (let i = 0; i < data.content.length; i++) {
+                    let row = table.insertRow(tempRow + i + 1);
+                    let idBlog = row.insertCell(0);
+                    let titleBlog = row.insertCell(1);
+                    let authorBlog = row.insertCell(2);
+                    let date = row.insertCell(3);
+                    let contentBlog = row.insertCell(4);
+                    let categoryBlog = row.insertCell(5);
+                    idBlog.innerHTML = data.content[i].id;
+                    titleBlog.innerHTML = data.content[i].title;
+                    authorBlog.innerHTML = data.content[i].author;
+                    date.innerHTML = data.content[i].dateSubmitted;
+                    contentBlog.innerHTML = data.content[i].content;
+                    categoryBlog.innerHTML = data.content[i].category.nameCategory;
+                }
+            },
+
+        })
+    })
 </script>
 </body>
 </html>
